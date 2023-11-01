@@ -1,12 +1,19 @@
 package com.nosec.course.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name="tb_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1;
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String email;
     private String phone;
@@ -15,7 +22,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(long id, String nome, String email, String phone, String password) {
+    public User(Long id, String nome, String email, String phone, String password) {
         this.id = id;
         this.nome = nome;
         this.email = email;
