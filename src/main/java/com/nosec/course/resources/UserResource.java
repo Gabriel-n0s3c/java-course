@@ -2,9 +2,11 @@ package com.nosec.course.resources;
 
 import com.nosec.course.entities.User;
 import com.nosec.course.repositoires.UserRepository;
+import com.nosec.course.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +17,19 @@ import java.util.List;
 public class UserResource {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers(){
+    public ResponseEntity<List<User>> findAll(){
+         List<User> listUsers = userService.findAll();
+        return ResponseEntity.ok().body(listUsers);
+    }
 
-        User user = new User();
-        return ResponseEntity.ok().body(userRepository.findAll());
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<User> findById(@PathVariable Long id){
+
+        User user = userService.findByID(id);
+        return ResponseEntity.ok().body(user);
     }
 
 
