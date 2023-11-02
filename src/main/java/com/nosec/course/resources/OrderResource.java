@@ -1,7 +1,7 @@
 package com.nosec.course.resources;
 
-import com.nosec.course.entities.User;
-import com.nosec.course.services.UserService;
+import com.nosec.course.entities.Order;
+import com.nosec.course.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/orders")
+public class OrderResource {
 
     @Autowired
-    UserService userService;
+    OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
-         List<User> listUsers = userService.findAll();
+    public ResponseEntity<List<Order>> findAll(){
+         List<Order> listUsers = orderService.findAll();
         return ResponseEntity.ok().body(listUsers);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id){
+    public ResponseEntity<Order> findById(@PathVariable Long id){
 
-        User user = userService.findByID(id);
+        Order user = orderService.findByID(id);
         return ResponseEntity.ok().body(user);
     }
 

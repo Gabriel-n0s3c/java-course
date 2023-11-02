@@ -1,7 +1,7 @@
 package com.nosec.course.services;
 
 import com.nosec.course.entities.User;
-import com.nosec.course.repositoires.UserRepository;
+import com.nosec.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

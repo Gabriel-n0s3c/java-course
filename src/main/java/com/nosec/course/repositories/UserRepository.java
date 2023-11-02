@@ -1,4 +1,4 @@
-package com.nosec.course.repositoires;
+package com.nosec.course.repositories;
 
 import com.nosec.course.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
