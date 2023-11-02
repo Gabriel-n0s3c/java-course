@@ -1,8 +1,10 @@
 package com.nosec.course.config;
 
+import com.nosec.course.entities.Category;
 import com.nosec.course.entities.Order;
 import com.nosec.course.entities.User;
 import com.nosec.course.entities.enums.OrderStatus;
+import com.nosec.course.repositories.CategoryRepository;
 import com.nosec.course.repositories.OrderRepository;
 import com.nosec.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,13 @@ import java.util.Arrays;
 public class TestConfig implements CommandLineRunner {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
     @Override
     public void run(String... args) throws Exception {
         User u1 = new User( null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
@@ -36,6 +41,12 @@ public class TestConfig implements CommandLineRunner {
 
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 
     }
 }
