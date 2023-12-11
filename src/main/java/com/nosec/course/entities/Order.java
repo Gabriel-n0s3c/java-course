@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name="tb_order")
+@Table(name = "tb_order")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1;
@@ -30,10 +30,15 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payments payments;
+
+
     public Order() {
     }
 
-    public Order(Long id, Instant moment, OrderStatus orderStatus ,User client) {
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.moment = moment;
         setOrderStatus(orderStatus);
@@ -56,12 +61,12 @@ public class Order implements Serializable {
         this.moment = moment;
     }
 
-    public OrderStatus getOrderStatus(){
+    public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(this.orderStatus);
     }
 
-    public void setOrderStatus(OrderStatus orderStatus){
-        if(orderStatus != null){
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null) {
             this.orderStatus = orderStatus.getCode();
         }
     }
@@ -75,9 +80,18 @@ public class Order implements Serializable {
     }
 
 
-    public Set<OrderItem> getItems(){
+    public Payments getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Payments payments) {
+        this.payments = payments;
+    }
+
+    public Set<OrderItem> getItems() {
         return this.items;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
